@@ -2,6 +2,25 @@
 
 Diário do repositório, append-only. Entrada mais recente no topo.
 
+## 2026-09-03 — Cartão de compartilhamento em duas proporções
+
+**O quê:** O CEO pediu um cartão de compartilhamento mais no padrão do projeto (fundo azul,
+degradê verde no canto, só o logo) e perguntou se um formato mais largo (3:1) era viável. Não é: o
+cartão grande do WhatsApp/Facebook recorta a imagem para 1,91:1, e uma arte mais larga perde
+margem nas bordas. `scripts/gera-og.py` passou a gerar dois cartões — `assets/marca/og.png`
+(1200×630, o principal) e `assets/marca/og-quadrado.png` (1080×1080, novo), os dois com o mesmo
+desenho do cabeçalho do site (degradê a 140° + camada radial verde no canto + cunha clara em véu,
+gota e wordmark), sem os textos de slogan da versão anterior. `index.html` ganhou a segunda tag
+`og:image` para o quadrado.
+
+**Por quê:** a proporção do cartão grande não é escolha de layout do site — é o que o consumidor
+da metatag (WhatsApp, Facebook) decidiu e recorta sem avisar. Oferecer as duas variantes cobre o
+caso em que o consumidor da tag prefere quadrado, sem abrir mão do formato recomendado como
+principal.
+
+**Arquivos-chave:** `scripts/gera-og.py`, `assets/marca/og.png`, `assets/marca/og-quadrado.png`,
+`index.html`.
+
 ## 2026-09-03 — Site "em breve" do lav.eco
 
 **O quê:** Criação do repositório e da página "em breve" do Lav.eco — marketplace de lavagem de

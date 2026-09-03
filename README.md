@@ -13,7 +13,8 @@ construção em `C:\Projetos\APPS\laveco\`; este repositório é só o site.
 |---|---|
 | `index.html` | **A página inteira** — marcação, CSS e SVG, tudo num arquivo. Sem JavaScript. |
 | `assets/marca/gota.svg` | O ícone da aba (favicon). |
-| `assets/marca/og.png` | O cartão de compartilhamento, 1200×630 — gerado, não desenhado à mão. |
+| `assets/marca/og.png` | O cartão de compartilhamento, 1200×630 (1,91:1) — gerado, não desenhado à mão. |
+| `assets/marca/og-quadrado.png` | Segunda `og:image`, 1080×1080 — para quando o consumidor da metatag pedir quadrado. |
 | `CNAME` | `lav.eco` — o domínio do GitHub Pages. |
 | `.nojekyll` | Desliga o Jekyll no Pages: o site é servido como está. |
 
