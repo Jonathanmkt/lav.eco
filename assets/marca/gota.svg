@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Lav.eco">
+  <defs>
+    <linearGradient id="g" x1="14" y1="6" x2="86" y2="94" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#C9EBFC"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#063A7A"/>
+  <!-- gota: vertice em cima, base circular. Vetor proprio, sem parentesco com o poster. -->
+  <path fill="url(#g)" d="M50 18c11.5 12.4 20 22.6 20 32.6C70 62.4 61 71 50 71S30 62.4 30 50.6C30 40.6 38.5 30.4 50 18Z"/>
+  <!-- o filete verde: acento, nunca portador unico de significado -->
+  <path stroke="#12B183" stroke-width="5" stroke-linecap="round" d="M36 82h28"/>
+</svg>

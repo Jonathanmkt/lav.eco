@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lav.eco — lavagem ecológica a seco, onde o seu carro já está</title>
+<meta name="description" content="Lav.eco é a lavagem de carro ecológica a seco que vai até onde o seu carro já está — na rua ou no condomínio, na janela de horário que você marcar. Em breve.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://lav.eco/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Lav.eco">
+<meta property="og:title" content="Lav.eco — carro limpo, consciência também">
+<meta property="og:description" content="Lavagem ecológica a seco, feita onde o seu carro já está. Em breve.">
+<meta property="og:url" content="https://lav.eco/">
+<meta property="og:image" content="https://lav.eco/assets/marca/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#063A7A">
+
+<link rel="icon" href="assets/marca/gota.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/marca/gota.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   Tokens — cópia da camada USO do design system do app (ds-laveco.ts).
+   Nenhuma regra abaixo escreve hex direto: quem trocar a marca troca só aqui.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* rampa da marca */
+  --azul950:#04305F; --azul900:#063A7A; --azul800:#0A57C2; --azul700:#0B63DC;
+  --azul500:#2C9FEA; --azul300:#58C0F5; --azul100:#C9EBFC; --azul50:#EAF6FE;
+  /* o verde: acento, matiz 162° */
+  --verde700:#0B7A5A; --verde500:#12B183; --verde50:#EFFBF6;
+  /* neutros frios */
+  --tinta:#0B1B2B; --tinta70:#43596E; --tinta45:#5D7086;
+  --linha:#DAE1E7; --fundo:#F2F8FF; --papel:#FFFFFF;
+
+  /* papéis — é esta camada que o CSS abaixo enxerga */
+  --superficie:var(--papel);
+  --superficie-fundo:var(--fundo);
+  --superficie-suave:var(--azul50);
+  --texto-forte:var(--tinta);
+  --texto-apoio:var(--tinta70);
+  --texto-primario:var(--azul700);
+  --texto-sobre-marca:#FFFFFF;
+  --texto-acento:var(--verde700);
+  --borda:var(--linha);
+  --borda-acento:var(--verde500);
+  --icone:var(--azul700);
+  --icone-acento:var(--verde700);
+  --veu-escuro:rgba(4,48,95,.34);
+
+  /* degradês — as mesmas paradas do GRADIENTE.marca, com a camada verde do canto por cima */
+  --grad-marca:
+    radial-gradient(144% 108% at 108% 112%, var(--verde500) 0%, rgba(18,177,131,0) 62%),
+    linear-gradient(140deg, var(--azul900) 0%, var(--azul800) 40%, var(--azul700) 68%, var(--azul500) 100%);
+  /* a cunha clara que cruza o cabeçalho — véu, não cor (12%, ver ds-laveco.ts) */
+  --cunha:linear-gradient(118deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.12) 38%, rgba(255,255,255,0) 38.4%);
+  /* ⚠️ O véu escuro do cabeçalho — 25% de azul950 por cima de TUDO, cunha inclusive.
+     Não é gosto: no app o degradê da marca ocupa um cabeçalho; aqui ele ocupa uma tela
+     inteira, e o mesmo desenho esticado leva o trecho claro para debaixo do texto branco.
+     A 360px o `confere-contraste` media 4,28:1 na chamada e 3,32:1 no aviso, os dois
+     abaixo do piso de 4,5:1. Com 25%, e com o canto verde encolhido no celular, o pior
+     par da página inteira passa a ser 4,73:1 (a 414px). A opacidade saiu da medida do
+     pior pixel, não do olho — 22% ainda deixava um texto em 4,50:1, na trave. */
+  --veu-cabecalho:rgba(4,48,95,.25);
+
+  --sombra-card:0 2px 10px rgba(6,58,122,.07);
+
+  --fonte:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --limite:1080px;
+  --margem:20px;
+  --respiro:clamp(56px,9vw,104px);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--fonte);
+  background:var(--superficie-fundo);
+  color:var(--texto-forte);
+  font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:var(--texto-primario)}
+:focus-visible{outline:3px solid var(--azul300);outline-offset:3px;border-radius:6px}
+.limite{width:100%;max-width:var(--limite);margin-inline:auto;padding-inline:var(--margem)}
+
+/* ───────────────────────── a superfície de marca ───────────────────────── */
+.capa{
+  position:relative;overflow:hidden;isolation:isolate;
+  background:var(--grad-marca);
+  color:var(--texto-sobre-marca);
+  padding-block:clamp(48px,11vw,96px) clamp(64px,13vw,120px);
+}
+/* ⚠️ O raio do canto verde é fração da CAIXA, e a caixa muda de forma no celular:
+   a mesma conta que no desktop deixa o verde num canto, num cabeçalho alto e estreito
+   sobe o verde até a última linha de texto. Medido: 4,38:1 no aviso a 360px. O raio
+   vertical encolhe, e o canto volta a ser canto. Cópia é do que se vê, não do que
+   está escrito — a mesma lição que o `botaoEco` já tinha ensinado no app. */
+@media (max-width:759px){
+  :root{
+    --grad-marca:
+      radial-gradient(150% 44% at 112% 104%, var(--verde500) 0%, rgba(18,177,131,0) 62%),
+      linear-gradient(140deg, var(--azul900) 0%, var(--azul800) 40%, var(--azul700) 68%, var(--azul500) 100%);
+  }
+}
+.capa::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  /* ⚠️ o véu vai como CAMADA, não como cor: numa lista de `background`, só a última
+     camada aceita cor — pôr `rgba(...)` na primeira derruba a declaração inteira, em
+     silêncio, e o quadro sai idêntico ao de antes. Foi o que aconteceu na 1ª medida. */
+  background:linear-gradient(var(--veu-cabecalho),var(--veu-cabecalho)),var(--cunha);
+}
+.marca{display:flex;align-items:center;gap:12px}
+.marca svg{width:44px;height:44px;flex:none}
+.marca b{font-size:24px;font-weight:700;letter-spacing:-.4px}
+.selo{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:clamp(32px,7vw,56px);
+  padding:7px 14px 7px 12px;border-radius:999px;
+  background:var(--veu-escuro);border:1px solid rgba(255,255,255,.28);
+  font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+}
+.selo i{width:8px;height:8px;border-radius:50%;background:var(--borda-acento);flex:none}
+h1{
+  margin-top:20px;max-width:16ch;
+  font-size:clamp(30px,6.9vw,58px);line-height:1.08;font-weight:700;letter-spacing:-1px;
+}
+.chamada{margin-top:20px;max-width:46ch;font-size:clamp(16px,2.4vw,19px);line-height:1.55;font-weight:500}
+.aviso{
+  margin-top:clamp(32px,6vw,44px);display:inline-block;
+  padding-top:16px;border-top:2px solid var(--borda-acento);
+  font-size:13px;font-weight:600;letter-spacing:.3px;
+}
+
+/* ───────────────────────── o que vem ───────────────────────── */
+.secao{padding-block:var(--respiro)}
+.rotulo{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--texto-acento);
+}
+.rotulo::before{content:"";width:24px;height:2px;background:var(--borda-acento);border-radius:2px;flex:none}
+h2{margin-top:14px;font-size:clamp(24px,4.2vw,34px);line-height:1.18;font-weight:700;letter-spacing:-.5px;max-width:22ch}
+.intro{margin-top:14px;max-width:56ch;color:var(--texto-apoio);font-size:16px}
+
+.cartas{
+  margin-top:clamp(32px,5vw,48px);
+  display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+.carta{
+  background:var(--superficie);border:1px solid var(--borda);border-radius:20px;
+  padding:24px;box-shadow:var(--sombra-card);
+}
+.carta .icone{
+  width:44px;height:44px;border-radius:14px;
+  background:var(--superficie-suave);color:var(--icone);
+  display:grid;place-items:center;
+}
+.carta h3{margin-top:18px;font-size:17px;font-weight:700;letter-spacing:-.2px}
+.carta p{margin-top:8px;color:var(--texto-apoio);font-size:14.5px}
+
+/* ───────────────────────── o outro lado ───────────────────────── */
+.lavador{
+  background:var(--superficie);border:1px solid var(--borda);border-radius:24px;
+  padding:clamp(24px,4.5vw,40px);box-shadow:var(--sombra-card);
+  display:grid;gap:24px;align-items:center;
+}
+@media (min-width:760px){.lavador{grid-template-columns:1.1fr .9fr;gap:40px}}
+.lavador ul{list-style:none;display:grid;gap:12px}
+.lavador li{display:flex;gap:12px;align-items:flex-start;color:var(--texto-apoio);font-size:15px}
+.lavador li svg{flex:none;margin-top:3px;color:var(--icone-acento)}
+.lavador li b{color:var(--texto-forte);font-weight:600}
+
+/* ───────────────────────── rodapé ───────────────────────── */
+.rodape{background:var(--azul950);color:#C9D8EA;padding-block:40px;font-size:13px}
+.rodape .limite{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between}
+.rodape strong{color:#FFFFFF;font-weight:700;letter-spacing:-.2px;font-size:15px}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="limite">
+    <div class="marca">
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="gm" x1="14" y1="6" x2="86" y2="94" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9EBFC"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="rgba(255,255,255,.16)"/>
+        <path fill="url(#gm)" d="M50 18c11.5 12.4 20 22.6 20 32.6C70 62.4 61 71 50 71S30 62.4 30 50.6C30 40.6 38.5 30.4 50 18Z"/>
+        <path stroke="#12B183" stroke-width="5" stroke-linecap="round" d="M36 82h28"/>
+      </svg>
+      <b>Lav.eco</b>
+    </div>
+
+    <p class="selo"><i aria-hidden="true"></i>Em breve</p>
+    <h1>Carro limpo, consciência&nbsp;também.</h1>
+    <p class="chamada">
+      Lavagem ecológica a seco, feita onde o seu carro já está parado — na rua ou na garagem do
+      condomínio, na janela de horário que você marcar.
+    </p>
+    <p class="aviso">Estamos construindo o aplicativo. Volte em breve.</p>
+  </div>
+</header>
+
+<main>
+  <section class="secao" aria-labelledby="t-vem">
+    <div class="limite">
+      <p class="rotulo">O que vem por aí</p>
+      <h2 id="t-vem">Quatro coisas que o Lav.eco vai fazer</h2>
+      <p class="intro">
+        Um resumo do que está sendo construído. Nada aqui está no ar ainda — esta página existe
+        para dizer o que vem.
+      </p>
+
+      <div class="cartas">
+        <article class="carta">
+          <div class="icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>O lavador vai até o carro</h3>
+          <p>Você não sai do lugar e o carro não sai da vaga. O serviço acontece onde ele já está —
+             na rua ou dentro do condomínio.</p>
+        </article>
+
+        <article class="carta">
+          <div class="icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+          </div>
+          <h3>Lavagem a seco, sem mangueira</h3>
+          <p>Só a parte externa, com produto próprio para lavagem sem água. É daí que vem o “eco”
+             do nome.</p>
+        </article>
+
+        <article class="carta">
+          <div class="icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4h5L17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l2.5-3Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          </div>
+          <h3>Antes e depois, com foto</h3>
+          <p>A lavagem chega registrada no aplicativo. Você confere e aprova pelo celular, sem
+             discussão de porta de garagem.</p>
+        </article>
+
+        <article class="carta">
+          <div class="icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+          </div>
+          <h3>Tudo pago pelo aplicativo</h3>
+          <p>Preço fechado antes de começar e pagamento dentro do app. Sem dinheiro na mão e sem
+             combinar valor na hora.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao" style="padding-top:0" aria-labelledby="t-lavador">
+    <div class="limite">
+      <div class="lavador">
+        <div>
+          <p class="rotulo">Para quem lava</p>
+          <h2 id="t-lavador">Também estamos construindo o outro lado</h2>
+          <p class="intro">
+            O Lav.eco só existe com quem põe a mão no carro. O aplicativo do lavador entra junto,
+            não depois.
+          </p>
+        </div>
+        <ul>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>
+            <span><b>Agenda própria.</b> Você aceita o que cabe no seu dia.</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>
+            <span><b>Serviços por região.</b> Menos deslocamento entre um carro e o próximo.</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>
+            <span><b>Recebimento pela plataforma.</b> Sem cobrar do cliente na hora.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="limite">
+    <strong>Lav.eco</strong>
+    <span>Carro limpo, consciência também. · Site em construção · 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
