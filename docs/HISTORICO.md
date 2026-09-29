@@ -2,6 +2,22 @@
 
 Diário do repositório, append-only. Entrada mais recente no topo.
 
+## 2026-09-29 — Página /excluir-conta (URL pública de exclusão de conta)
+
+**O quê:** Nova página `excluir-conta/index.html`, gerada por `scripts/gera-paginas-legais.py --so-excluir-conta`
+a partir de `scripts/excluir-conta.md`: passo a passo (pedido por e-mail a contato@lav.eco, prazo de 15 dias),
+o que é excluído e o que é mantido e por quanto tempo, e o caso das fotos enviadas à DeepSeek. Os rodapés do
+`index.html` e das páginas legais agora dizem "Privacidade · Termos · Excluir conta".
+
+**Por quê:** a Google Play exige uma URL pública de exclusão de conta para o app publicado (a mesma pendência
+que a privacidade marcava como `[PENDENTE]`). Pedido do CEO. Como ainda não há botão de exclusão no app, o
+caminho é só por e-mail, e a página diz isso. Diferente de privacidade e termos, o texto-fonte mora neste
+repositório (`scripts/excluir-conta.md`), não vem do assessor jurídico; por isso a flag separada, que não
+exige os `.md` dele. Motivo dos prazos de retenção (5 anos, 3 anos, 6 meses) não foi documentado aqui: vêm do
+texto da página, que cita as leis. Privacidade e termos foram regerados só para trocar o rodapé.
+
+**Arquivos-chave:** `excluir-conta/index.html`, `scripts/excluir-conta.md`, `scripts/gera-paginas-legais.py`, rodapés.
+
 ## 2026-09-29 — Páginas /privacidade e /termos, publicadas com pendências à vista
 
 **O quê:** O site ganhou `privacidade/index.html` e `termos/index.html` (URL sem `.html`), geradas

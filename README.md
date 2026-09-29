@@ -13,7 +13,8 @@ construção em `C:\Projetos\APPS\laveco\`; este repositório é só o site.
 |---|---|
 | `index.html` | **A página inteira** — marcação, CSS e SVG, tudo num arquivo. Sem JavaScript. |
 | `privacidade/index.html`, `termos/index.html` | Política de Privacidade e Termos de Uso, servidos em `/privacidade` e `/termos`. **Gerados** — não edite à mão. |
-| `scripts/gera-paginas-legais.py` | Gera as duas páginas a partir dos `.md` do assessor jurídico (`python scripts/gera-paginas-legais.py`). |
+| `excluir-conta/index.html` | Página pública de exclusão de conta e dados (`/excluir-conta`), exigida pela Google Play. **Gerada** de `scripts/excluir-conta.md`. |
+| `scripts/gera-paginas-legais.py` | Gera privacidade e termos a partir dos `.md` do assessor jurídico (`python scripts/gera-paginas-legais.py`); com `--so-excluir-conta` gera só a página de exclusão a partir de `scripts/excluir-conta.md`. |
 | `assets/marca/gota.svg` | O ícone da aba (favicon). |
 | `assets/marca/og.png` | O cartão de compartilhamento, 1200×630 (1,91:1) — gerado, não desenhado à mão. |
 | `assets/marca/og-quadrado.png` | Segunda `og:image`, 1080×1080 — para quando o consumidor da metatag pedir quadrado. |

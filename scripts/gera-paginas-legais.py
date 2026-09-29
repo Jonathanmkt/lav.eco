@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Gera privacidade/index.html e termos/index.html a partir dos .md do assessor juridico.
+  --so-excluir-conta gera excluir-conta/index.html a partir de scripts/excluir-conta.md.
 
   python scripts/gera-paginas-legais.py                     # procura os .md mais recentes
   python scripts/gera-paginas-legais.py --privacidade X.md --termos Y.md
@@ -29,6 +30,11 @@ PAGINAS = {
         chave="termos", pasta="termos",
         titulo="Termos de Uso",
         descricao="Os Termos de Uso do Lav.eco: como funciona a lavagem ecológica a seco, a carteira, a cobrança, o cancelamento e as responsabilidades de cada parte.",
+    ),
+    "excluir-conta": dict(
+        chave="excluir-conta", pasta="excluir-conta",
+        titulo="Excluir conta e dados",
+        descricao="Como pedir a exclusão da sua conta e dos seus dados no app Laveco (Lav.eco), da VirtueTech: passo a passo, o que é excluído e o que é mantido, e por quanto tempo.",
     ),
 }
 
@@ -311,7 +317,7 @@ def pagina(cfg, corpo):
   <div class="limite">
     <strong>Lav.eco</strong>
     <span>Carro limpo, consciência também. · 2026</span>
-    <nav aria-label="Documentos legais"><a href="/privacidade/"{atual("privacidade")}>Privacidade</a> · <a href="/termos/"{atual("termos")}>Termos</a></nav>
+    <nav aria-label="Documentos legais"><a href="/privacidade/"{atual("privacidade")}>Privacidade</a> · <a href="/termos/"{atual("termos")}>Termos</a> · <a href="/excluir-conta/"{atual("excluir-conta")}>Excluir conta</a></nav>
   </div>
 </footer>
 </body>
@@ -331,7 +337,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--privacidade")
     ap.add_argument("--termos")
+    ap.add_argument("--so-excluir-conta", action="store_true",
+                    help="gera so excluir-conta/ (fonte: scripts/excluir-conta.md, escrito aqui, nao pelo juridico)")
     a = ap.parse_args()
+    if a.so_excluir_conta:
+        h1, corpo, pend = converte((RAIZ / "scripts" / "excluir-conta.md").read_text(encoding="utf-8"))
+        cfg = PAGINAS["excluir-conta"]
+        destino = RAIZ / cfg["pasta"] / "index.html"
+        destino.parent.mkdir(exist_ok=True)
+        destino.write_text(pagina(cfg, corpo), encoding="utf-8", newline="\n")
+        print(f"{destino}  (pendentes: {len(pend)})")
+        return
     fontes = {
         "privacidade": Path(a.privacidade) if a.privacidade else acha("privacidade"),
         "termos": Path(a.termos) if a.termos else acha("termos"),
