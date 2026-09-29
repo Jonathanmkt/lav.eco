@@ -12,11 +12,20 @@ construção em `C:\Projetos\APPS\laveco\`; este repositório é só o site.
 | Arquivo | O que é |
 |---|---|
 | `index.html` | **A página inteira** — marcação, CSS e SVG, tudo num arquivo. Sem JavaScript. |
+| `privacidade/index.html`, `termos/index.html` | Política de Privacidade e Termos de Uso, servidos em `/privacidade` e `/termos`. **Gerados** — não edite à mão. |
+| `scripts/gera-paginas-legais.py` | Gera as duas páginas a partir dos `.md` do assessor jurídico (`python scripts/gera-paginas-legais.py`). |
 | `assets/marca/gota.svg` | O ícone da aba (favicon). |
 | `assets/marca/og.png` | O cartão de compartilhamento, 1200×630 (1,91:1) — gerado, não desenhado à mão. |
 | `assets/marca/og-quadrado.png` | Segunda `og:image`, 1080×1080 — para quando o consumidor da metatag pedir quadrado. |
 | `CNAME` | `lav.eco` — o domínio do GitHub Pages. |
 | `.nojekyll` | Desliga o Jekyll no Pages: o site é servido como está. |
+
+## Páginas legais — com pendências à vista
+
+⚠️ O texto é do assessor jurídico e **foi publicado com 5 marcas `[PENDENTE]` visíveis** (decisão do
+CEO, 29/09/2026, para o teste interno da Google Play). Elas aparecem em caixa/marca destacada; a
+lista e o que falta construir estão em `docs/HISTORICO.md`. Ao sair texto novo do jurídico,
+rode o gerador e confira que as marcas resolvidas sumiram.
 
 ## O design vem do app, não deste repositório
 

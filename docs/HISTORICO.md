@@ -2,6 +2,31 @@
 
 Diário do repositório, append-only. Entrada mais recente no topo.
 
+## 2026-09-29 — Páginas /privacidade e /termos, publicadas com pendências à vista
+
+**O quê:** O site ganhou `privacidade/index.html` e `termos/index.html` (URL sem `.html`), geradas
+por `scripts/gera-paginas-legais.py` a partir dos `.md` do assessor jurídico
+(`administrativo/assessor-juridico/publicaveis/laveco/`, na estrutura). O script só veste o texto
+(sem dependência externa, não reescreve nada) e transforma cada `[PENDENTE: ...]` em destaque
+visual, listando-os ao fim da execução. O rodapé do `index.html` passou a ter os links
+"Privacidade · Termos".
+
+**Por quê:** o teste interno da Google Play exige política de privacidade em endereço público, e
+`lav.eco/privacidade` dava 404 (era pendência da T20, login Google). Decisão do CEO em 29/09/2026:
+**publicar já com as 5 marcas `[PENDENTE]` visíveis** e construir depois o que o jurídico apontou.
+Deixar as marcas destacadas foi de propósito, para ninguém tomar o texto por final.
+As 5 marcas no texto: privacidade — recusa do envio de fotos à DeepSeek, mecanismo de
+transferência internacional por fornecedor, caminho de exclusão de conta (app e web, exigido pela
+Google Play); termos — lista do que cada serviço inclui/exclui e apólice de seguro de
+responsabilidade civil.
+**Pendências de construção decididas (fora deste repo, ainda não feitas):** consentimento para
+envio das fotos à DeepSeek; exclusão de conta; devolução de saldo; revisão da cobrança pela IA;
+exclusão automática das fotos em 3 anos. Ao resolver cada uma, regenerar as páginas com o texto
+novo do assessor e conferir que a marca correspondente sumiu.
+
+**Arquivos-chave:** `privacidade/index.html`, `termos/index.html`,
+`scripts/gera-paginas-legais.py`, `index.html` (rodapé).
+
 ## 2026-09-03 — Cartão de compartilhamento em duas proporções
 
 **O quê:** O CEO pediu um cartão de compartilhamento mais no padrão do projeto (fundo azul,
